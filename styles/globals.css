@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    body {
+        @apply dark:bg-black bg-white;
+    }
+
+    a {
+        @apply dark:text-blue-400 text-blue-600;
+    }
+
+    h1 {
+        font-size: 24pt;
+    }
+}
