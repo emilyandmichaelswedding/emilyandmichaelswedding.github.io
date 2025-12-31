@@ -8,6 +8,7 @@ import { Mate } from 'next/font/google'
 
 
 const mate = Mate({ subsets: ['latin'], weight: ["400"] });
+const fontFamily = mate.style.fontFamily;
 
 export function obfuscate( domain, em_name ) { 
     // Credit to Dan Jurafsky for this function.
@@ -39,10 +40,10 @@ export default class FooterBar extends React.Component<any, any> {
   return (
     <>
     {/* Apply tailwind styling to the box */}
-    <Box className="dark:bg-black bg-white" style={{position: 'fixed', bottom: 0, width: '100%', zIndex: 1000}}>
-    <Toolbar variant="dense">
+    <Box className={mate.className + " dark:bg-black bg-white"} style={{position: 'fixed', bottom: 0, width: '100%', zIndex: 1000}} sx={{ fontFamily }}>
+    <Toolbar variant="dense" className={mate.className} sx={{ fontFamily }}>
 
-      <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} className={mate.className} style={{textAlign: 'center', fontSize: '14px'}}>
+      <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontFamily }} className={mate.className} style={{textAlign: 'center', fontSize: '14px'}}>
         { this.state.isMobile ? (
             <>Made with &#10084;&#65039; by Em&M</>
          ) : 
