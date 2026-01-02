@@ -40,7 +40,7 @@ const SchedulePage: React.FC = () => {
         <section className="mt-6">
           {accessLevel === 'family' ? <CloseFamilyLanding /> : <GeneralLanding />}
         </section>
-        <div className="mt-8 flex items-center gap-3">
+        {/* <div className="mt-8 flex items-center gap-3">
           <button
             type="button"
             className="text-sm text-gray-600 dark:text-gray-300 underline"
@@ -51,7 +51,7 @@ const SchedulePage: React.FC = () => {
           >
             Log Out
           </button>
-        </div>
+        </div> */}
       </main>
       <FooterBar isMobile={isMobile} />
     </div>
