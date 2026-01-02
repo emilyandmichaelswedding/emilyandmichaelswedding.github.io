@@ -39,12 +39,29 @@ export default class FooterBar extends React.Component<any, any> {
     <Toolbar variant="dense" style={{fontFamily: 'inherit'}}>
 
       <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{textAlign: 'center', fontSize: '14px', fontFamily: 'inherit'}}>
-        { this.state.isMobile ? (
-            <>Made with &#10084;&#65039; by Em&M</>
-         ) : 
-          (
-            <>Made with &#10084;&#65039; by Emily & Michael (w/ a little help from <a href='https://nextjs.org'>next.js</a>).</>
-          )}
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "0.5rem"
+        }}>
+          <div style={{
+            width: "30px",
+            height: "1px",
+            background: "linear-gradient(90deg, transparent, #667eea, transparent)"
+          }}></div>
+          { this.state.isMobile ? (
+              <>Made with <span style={{fontSize: '1.2rem', color: '#667eea'}}>♥</span> by Em&M</>
+           ) : 
+            (
+              <>Made with <span style={{fontSize: '1.2rem', color: '#667eea'}}>♥</span> by Emily & Michael (w/ a little help from <a href='https://nextjs.org'>next.js</a>).</>
+            )}
+          <div style={{
+            width: "30px",
+            height: "1px",
+            background: "linear-gradient(90deg, transparent, #667eea, transparent)"
+          }}></div>
+        </div>
       </Typography>
 
       <ThemeSwitch />

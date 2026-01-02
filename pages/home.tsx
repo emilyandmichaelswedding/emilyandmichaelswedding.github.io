@@ -193,30 +193,6 @@ class HomeComponent extends React.Component<any, any> {
                 />
               )}
             </div>
-
-            {/* Decorative elements */}
-            <div style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: "2rem",
-              gap: "1rem"
-            }}>
-              <div style={{
-                width: "50px",
-                height: "2px",
-                background: "linear-gradient(90deg, transparent, #667eea, transparent)"
-              }}></div>
-              <div style={{
-                fontSize: "1.5rem",
-                color: "#667eea"
-              }}>♥</div>
-              <div style={{
-                width: "50px",
-                height: "2px",
-                background: "linear-gradient(90deg, transparent, #667eea, transparent)"
-              }}></div>
-            </div>
           </div>
 
         </main>
