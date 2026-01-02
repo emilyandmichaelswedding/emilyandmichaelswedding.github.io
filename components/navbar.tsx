@@ -19,7 +19,8 @@ export default function ButtonAppBar({ isMobile = false }: ButtonAppBarProps) {
   const menuItems = [
     { label: 'Home', href: '/' },
     { label: 'Schedule of Events', href: '/schedule' },
-    { label: 'Your Trip to Victoria', href: '/trip' }
+    { label: 'Your Trip to Victoria', href: '/trip' },
+    { label: 'RSVP', href: '/rsvp' }
   ];
 
   return (
@@ -36,8 +37,15 @@ export default function ButtonAppBar({ isMobile = false }: ButtonAppBarProps) {
                 key={index}
                 color="inherit" 
                 href={item.href} 
-                className="text-md"
-                style={{ fontFamily: 'inherit' }}
+                className={`text-md ${item.label === 'RSVP' ? 'rounded' : ''}`}
+                style={{ 
+                  fontFamily: 'inherit',
+                  ...(item.label === 'RSVP' ? {
+                    backgroundColor: '#667eea',
+                    color: 'white',
+                    padding: '6px 16px'
+                  } : {})
+                }}
               >
                 {item.label}
               </Button>
@@ -77,8 +85,15 @@ export default function ButtonAppBar({ isMobile = false }: ButtonAppBarProps) {
                 color="inherit"
                 href={item.href}
                 fullWidth
-                className="text-md justify-start"
-                style={{ fontFamily: 'inherit' }}
+                className={`text-md justify-start ${item.label === 'RSVP' ? 'rounded' : ''}`}
+                style={{ 
+                  fontFamily: 'inherit',
+                  ...(item.label === 'RSVP' ? {
+                    backgroundColor: '#667eea',
+                    color: 'white',
+                    marginBottom: '4px'
+                  } : {})
+                }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
