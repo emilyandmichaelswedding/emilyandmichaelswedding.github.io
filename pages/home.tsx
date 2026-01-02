@@ -12,52 +12,52 @@ class HomeComponent extends React.Component<any, any> {
   // Sample photos data - replace with actual photo URLs and dimensions
   photos = [
     {
-      src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop&crop=faces",
+      src: "/coverPhotos/2022-graduation-85.jpg",
       width: 800,
       height: 600,
-      alt: "Our Engagement Photo"
+      alt: "Graduating from Stanford"
     },
     {
-      src: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=1200&h=800&fit=crop&crop=faces",
+      src: "/coverPhotos/cape-cod.jpg",
       width: 1200,
       height: 800,
-      alt: "First Date"
+      alt: "Together at Cape Cod"
     },
     {
-      src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=900&h=600&fit=crop&crop=faces",
+      src: "/coverPhotos/tahoe-ski.jpg",
       width: 900,
       height: 600,
-      alt: "Adventure Together"
+      alt: "Skiing together in Tahoe"
     },
     {
-      src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=700&h=900&fit=crop&crop=faces",
+      src: "/coverPhotos/love-sf-moma.jpg",
       width: 700,
       height: 900,
-      alt: "Happy Moments"
+      alt: "Valentine's Date in SF MoMa"
     },
     {
-      src: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=1000&h=667&fit=crop&crop=faces",
+      src: "/coverPhotos/great-wall.jpg",
       width: 1000,
       height: 667,
-      alt: "Love & Laughter"
+      alt: "Climbing the Great Wall of China Together"
     },
     {
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=1000&fit=crop&crop=faces",
+      src: "/coverPhotos/engagement-1.JPEG",
       width: 800,
       height: 1000,
-      alt: "Building Dreams"
+      alt: "The moment we got engaged!"
     },
     {
-      src: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1100&h=733&fit=crop&crop=faces",
+      src: "/coverPhotos/toronto-keg.jpg",
       width: 1100,
       height: 733,
-      alt: "Sweet Memories"
+      alt: "Michael's birthday dinner at The Keg"
     },
     {
-      src: "https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=900&h=1200&fit=crop&crop=faces",
+      src: "/coverPhotos/vball-yr2.JPG",
       width: 900,
       height: 1200,
-      alt: "Together Forever"
+      alt: "Viennese Ball Year 2"
     }
   ];
 
