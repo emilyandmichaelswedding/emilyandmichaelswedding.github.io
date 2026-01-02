@@ -12,10 +12,19 @@ const GENERAL_HASH = '505999582e91c28fb13dd691861395f441296ec305535fb77e99dea713
 async function hashPassword(raw: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(raw);
-  const digest = await crypto.subtle.digest('SHA-256', data);
-  return Array.from(new Uint8Array(digest))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
+
+  // Prefer Web Crypto when available (requires secure context/modern browser)
+  const subtle = typeof window !== 'undefined' ? window.crypto?.subtle : undefined;
+  if (subtle) {
+    const digest = await subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(digest))
+      .map((b) => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  // Fallback: use a small, on-demand hash to support browsers/contexts without Web Crypto
+  const { default: CryptoJS } = await import('crypto-js');
+  return CryptoJS.SHA256(raw).toString(CryptoJS.enc.Hex);
 }
 
 const Home: React.FC = () => {
