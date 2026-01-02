@@ -28,12 +28,12 @@ class HomeComponent extends React.Component<any, any> {
         alt: "Valentine's Date in SF MoMa"
       },
       {
-        src: "/coverPhotos/great-wall.jpg",
-        alt: "Climbing the Great Wall of China Together"
-      },
-      {
         src: "/coverPhotos/engagement-1.JPEG",
         alt: "The moment we got engaged!"
+      },
+      {
+        src: "/coverPhotos/great-wall.jpg",
+        alt: "Climbing the Great Wall of China Together"
       },
       {
         src: "/coverPhotos/toronto-keg.jpg",
