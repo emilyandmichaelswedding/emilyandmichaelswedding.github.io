@@ -6,11 +6,21 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 
 interface ButtonAppBarProps {
-  isMobile?: boolean;
+  isMobile?: boolean; // optional override from parent
 }
 
-export default function ButtonAppBar({ isMobile = false }: ButtonAppBarProps) {
+export default function ButtonAppBar({ isMobile: isMobileOverride }: ButtonAppBarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMobileDetected, setIsMobileDetected] = React.useState<boolean | null>(null);
+
+  React.useEffect(() => {
+    const detect = () => setIsMobileDetected(window.innerWidth < 768);
+    detect();
+    window.addEventListener('resize', detect);
+    return () => window.removeEventListener('resize', detect);
+  }, []);
+
+  const isMobile = isMobileOverride ?? isMobileDetected ?? false;
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,8 +34,11 @@ export default function ButtonAppBar({ isMobile = false }: ButtonAppBarProps) {
   ];
 
   return (
-    <Box className="relative text-gray-900 dark:text-gray-100">
-      <Toolbar variant="dense" className="flex justify-between items-center">
+    <Box className="relative z-30 text-gray-900 dark:text-gray-100">
+      <Toolbar
+        variant="dense"
+        className="flex justify-between items-center bg-white/90 dark:bg-gray-950/90 backdrop-blur"
+      >
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
         </Typography>
         
@@ -75,7 +88,7 @@ export default function ButtonAppBar({ isMobile = false }: ButtonAppBarProps) {
 
       {/* Mobile Menu - Only visible when open */}
       {isMobile && (
-        <div className={`absolute top-full left-0 right-0 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg transition-all duration-300 ${
+        <div className={`absolute top-full left-0 right-0 z-20 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg transition-all duration-300 ${
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
         }`}>
           <div className="p-4 space-y-2">

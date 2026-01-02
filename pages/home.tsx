@@ -136,7 +136,7 @@ class HomeComponent extends React.Component<any, any> {
     return (
       <div>
         <title>Emily and Michael's Wedding</title>
-        <ButtonAppBar isMobile={this.state.isMobile} />
+        <ButtonAppBar />
         {/* If mobile, make the main width 90%, else 75% */}
         <main style={{width: this.state.isMobile ? "90%" : "75%", margin: "auto"}}>
           <h1 style={{textAlign: "center"}}>Welcome to Our Life Together</h1>
