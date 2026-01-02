@@ -34,14 +34,13 @@ const SchedulePage: React.FC = () => {
 
   return (
     <div>
-      <title>Schedule of Events | Emily & Michael</title>
+      <title>Schedule of Events | Emily & Michael's Wedding</title>
       <ButtonAppBar />
       <main style={{ width: isMobile ? '90%' : '75%', margin: 'auto', paddingBottom: '72px' }}>
         <section className="mt-6">
           {accessLevel === 'family' ? <CloseFamilyLanding /> : <GeneralLanding />}
         </section>
         <div className="mt-8 flex items-center gap-3">
-          <a className="text-blue-600 dark:text-blue-400 underline" href="/home">Back to Home</a>
           <button
             type="button"
             className="text-sm text-gray-600 dark:text-gray-300 underline"
@@ -50,7 +49,7 @@ const SchedulePage: React.FC = () => {
               router.replace('/');
             }}
           >
-            Log out
+            Log Out
           </button>
         </div>
       </main>

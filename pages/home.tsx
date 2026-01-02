@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
               router.replace('/');
             }}
           >
-            Log out
+            Log Out
           </button>
         </section>
       </main>
