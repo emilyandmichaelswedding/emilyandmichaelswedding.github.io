@@ -35,8 +35,8 @@ export default class FooterBar extends React.Component<any, any> {
   return (
     <>
     {/* Apply tailwind styling to the box */}
-    <Box className={mate.className + " dark:bg-black bg-white"} style={{position: 'fixed', bottom: 0, width: '100%', zIndex: 1000}} sx={{ fontFamily }}>
-    <Toolbar variant="dense" className={mate.className} sx={{ fontFamily }}>
+    <Box className="dark:bg-black bg-white" style={{position: 'fixed', bottom: 0, width: '100%', zIndex: 1000, fontFamily: 'inherit'}}>
+    <Toolbar variant="dense" style={{fontFamily: 'inherit'}}>
 
       <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} style={{textAlign: 'center', fontSize: '14px', fontFamily: 'inherit'}}>
         { this.state.isMobile ? (
