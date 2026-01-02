@@ -39,7 +39,7 @@ const fridayFamilyExtras: EventItem[] = [
     locationLink: 'https://maps.app.goo.gl/PqdD5gq1n24QsK8bA',
     time: '2:30—3:30 PM',
     timeVague: 'Afternoon',
-    dressCode: 'Formal, with Asian or Chinese attire encouraged. Please do not wear red. We will be heading directly to the Chinese Tea Ceremony after this event, so please wear what you plan to the Chinese Tea Ceremony.'
+    dressCode: 'Formal, with Asian or Chinese attire encouraged. Please do not wear red; we will be heading directly to the Chinese Tea Ceremony after this event, so please wear what you plan to the Chinese Tea Ceremony.'
   },
   {
     title: 'Chinese Tea Ceremony',
@@ -123,6 +123,7 @@ const ScheduleDay: React.FC<ScheduleDayProps> = ({ heading, events }) => (
                 }
             </p>
           )}
+           <p className="text-sm text-gray-600 dark:text-gray-400"><b>Dress Code:</b> {event.dressCode || 'TBD'}</p>
           <p className="text-sm text-gray-600 dark:text-gray-400"><b>Details to be Announced</b></p>
           
           {/* COMMENTED OUT DETAILS */}
