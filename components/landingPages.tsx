@@ -10,6 +10,7 @@ export type EventItem = {
   locationLink?: string;
   dressCode?: string;
   travelNotes?: string;
+  icon?: string;
 };
 
 const introCopy = "Welcome! We are so excited for you to celebrate our marriage and the start our life together. Below, please find the schedule of events for our wedding weekend.";
@@ -26,8 +27,9 @@ const fridayGeneralEvents: EventItem[] = [
     location: 'Victoria International Marina (1 Cooperage Place, Victoria, B.C.)',
     locationLink: 'https://maps.app.goo.gl/cH9LMUCE3v6Gkkpr9',
     dressCode: 'Semi-Formal, with Asian or Chinese attire encouraged. Wear clothing that you can comfortably move around in. For footwear, please bring soft-bottomed shoes (e.g., dance shoes) or wear socks that you are willing to dance in. Please do not wear red.',
-    travelNotes: 'We encourage guests staying downtown to take one of the Victoria Harbour Ferries from Empress Dock to Songhees Landing (a 3-minute walk from the Marina)! These whimsical, brightly-colored water taxis will provide a picturesque welcome to Victoria as they ferry you to our venue. For guests seeking other modes of transportation, the Victoria International Marina is also accessible by car (6-minute drive) or foot (24-minute walk from downtown).'
-    },
+    travelNotes: 'We encourage guests staying downtown to take one of the Victoria Harbour Ferries from Empress Dock to Songhees Landing (a 3-minute walk from the Marina)! These whimsical, brightly-colored water taxis will provide a picturesque welcome to Victoria as they ferry you to our venue. For guests seeking other modes of transportation, the Victoria International Marina is also accessible by car (6-minute drive) or foot (24-minute walk from downtown).',
+    icon: '/scheduleIcons/social-dance.svg'
+  },
 ];
 
 const fridayFamilyExtras: EventItem[] = [
@@ -39,21 +41,24 @@ const fridayFamilyExtras: EventItem[] = [
     locationLink: 'https://maps.app.goo.gl/PqdD5gq1n24QsK8bA',
     time: '2:30—3:30 PM',
     timeVague: 'Afternoon',
-    dressCode: 'Formal, with Asian or Chinese attire encouraged. Please do not wear red. We will be heading directly to the Chinese Tea Ceremony after this event, so please wear what you plan to the Chinese Tea Ceremony.'
+    dressCode: 'Formal, with Asian or Chinese attire encouraged. Please do not wear red. We will be heading directly to the Chinese Tea Ceremony after this event, so please wear what you plan to the Chinese Tea Ceremony.',
+    icon: '/scheduleIcons/church.svg'
   },
   {
     title: 'Chinese Tea Ceremony',
     description: 'A traditional Chinese Tea Ceremony will take place. As a sign of gratitude and respect, we will kneel before our elders and serve them tea. In turn, we will receive gifts and blessings for our new life together.',
     time: '4:30—5:00 PM',
     timeVague: 'Early Evening',
-    dressCode: 'Formal, with Asian or Chinese attire encouraged. Please do not wear red.'
+    dressCode: 'Formal, with Asian or Chinese attire encouraged. Please do not wear red.',
+    icon: '/scheduleIcons/teapot.svg'
   },
   {
     title: 'Rehearsal Dinner',
     description: 'Immediately following the tea ceremony, an intimate dinner will take place for wedding party and close family members, thanking them for being such an important part of our lives and this special weekend.',
     time: '5:00—6:30 PM',
     timeVague: 'Evening',
-    dressCode: 'Formal, with Asian or Chinese attire encouraged. Please do not wear red.'
+    dressCode: 'Formal, with Asian or Chinese attire encouraged. Please do not wear red.',
+    icon: '/scheduleIcons/dinner.svg'
   },
 ];
 
@@ -66,7 +71,8 @@ const saturdayEvents: EventItem[] = [
     location: 'St. Andrew\'s Cathedral (740 View St, Victoria, B.C.)',
     locationVague: 'St. Andrew\'s Cathedral (740 View St, Victoria, B.C.)',
     locationLink: 'https://maps.app.goo.gl/PqdD5gq1n24QsK8bA',
-    dressCode: 'Formal Attire. Examples include a suit and tie with dress pants and shoes, or a floor-length gown. Please do not wear white, ivory, or cream.'
+    dressCode: 'Formal Attire. Examples include a suit and tie with dress pants and shoes, or a floor-length gown. Please do not wear white, ivory, or cream.',
+    icon: '/scheduleIcons/ceremony.svg'
   },
   {
     title: 'Cocktail Reception',
@@ -77,7 +83,8 @@ const saturdayEvents: EventItem[] = [
     locationVague: 'The Union Club of British Columbia (805 Gordon St, Victoria, B.C.)',
     locationLink: 'https://maps.app.goo.gl/x6s9dZNxSGPRTw8w7',
     dressCode: 'Formal Attire. Examples include a suit and tie with dress pants and shoes, or a floor-length gown. Please do not wear white, ivory, or cream.',
-    travelNotes: 'Our reception venue is a 9-minute walk from the Cathedral.'
+    travelNotes: 'Our reception venue is a 9-minute walk from the Cathedral.',
+    icon: '/scheduleIcons/cocktails.svg'
   },
   {
     title: 'Reception (Dinner & Dancing)',
@@ -87,7 +94,8 @@ const saturdayEvents: EventItem[] = [
     location: 'The Union Club of British Columbia (805 Gordon St, Victoria, B.C.)',
     locationVague: 'The Union Club of British Columbia (805 Gordon St, Victoria, B.C.)',
     locationLink: 'https://maps.app.goo.gl/x6s9dZNxSGPRTw8w7',
-    dressCode: 'Formal Attire, Black Tie Optional. Examples include a dark suit/tuxedo and tie with dress pants and shoes, or a floor-length gown. Please do not wear white, ivory, or cream.'
+    dressCode: 'Formal Attire, Black Tie Optional. Examples include a dark suit/tuxedo and tie with dress pants and shoes, or a floor-length gown. Please do not wear white, ivory, or cream.',
+    icon: '/scheduleIcons/dinner.svg'
   },
 ];
 
@@ -102,9 +110,20 @@ const ScheduleDay: React.FC<ScheduleDayProps> = ({ heading, events }) => (
     <div className="space-y-4">
       {events.map((event) => (
         <article key={event.title} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm">
-          <h3 className="text-xl font-medium">{event.title}</h3>
-          
-          <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.timeVague || 'TBD'}</p>
+          <div className="flex items-center gap-4">
+            {event.icon && (
+              <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center">
+                <img 
+                  src={event.icon} 
+                  alt="" 
+                  className={`dark:invert ${event.icon.includes('cocktails') ? 'w-12 h-12' : 'w-16 h-16'}`}
+                />
+              </div>
+            )}
+            <div className="flex-1">
+              <h3 className="text-xl font-medium">{event.title}</h3>
+              
+              <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.timeVague || 'TBD'}</p>
           {event.locationVague && (
             <p className="text-sm text-gray-600 dark:text-gray-400">
                 <b>Location:</b> {
@@ -154,7 +173,8 @@ const ScheduleDay: React.FC<ScheduleDayProps> = ({ heading, events }) => (
             />
           )} */}
 
-
+            </div>
+          </div>
         </article>
       ))}
     </div>
