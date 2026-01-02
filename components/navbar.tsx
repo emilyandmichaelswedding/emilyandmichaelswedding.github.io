@@ -24,7 +24,7 @@ export default function ButtonAppBar({ isMobile = false }: ButtonAppBarProps) {
   ];
 
   return (
-    <Box className="relative">
+    <Box className="relative text-gray-900 dark:text-gray-100">
       <Toolbar variant="dense" className="flex justify-between items-center">
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
         </Typography>
@@ -75,7 +75,7 @@ export default function ButtonAppBar({ isMobile = false }: ButtonAppBarProps) {
 
       {/* Mobile Menu - Only visible when open */}
       {isMobile && (
-        <div className={`absolute top-full left-0 right-0 bg-white shadow-lg transition-all duration-300 ${
+        <div className={`absolute top-full left-0 right-0 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg transition-all duration-300 ${
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
         }`}>
           <div className="p-4 space-y-2">
