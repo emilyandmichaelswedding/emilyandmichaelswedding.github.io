@@ -1,6 +1,6 @@
 # Your Trip to Victoria
 
-We're so thrilled for you to join us for this June in Victoria, British Columbia, Canada. We hope that the information below is useful as you plan your trip. This is an opinionated guide based on what has worked for the bride and groom in their myriad travels to Victoria over the years.
+We're so thrilled for you to join us this June in Victoria, British Columbia, Canada. We hope that the information below is useful as you plan your trip. This is an opinionated guide based on what has worked for the bride and groom in their myriad travels to Victoria over the years.
 
 ## Getting to Victoria
 
