@@ -9,65 +9,91 @@ import { useTheme } from "next-themes";
 // Make Home a class
 class HomeComponent extends React.Component<any, any> {
 
-  // Sample photos data - replace with actual photo URLs and dimensions
-  photos = [
+  // Photo URLs - dimensions will be detected dynamically
+  photoSources = [
       {
         src: "/coverPhotos/2022-graduation-85.jpg",
-        width: 800,
-        height: 600,
         alt: "Graduating from Stanford"
       },
       {
         src: "/coverPhotos/cape-cod.jpg",
-        width: 1200,
-        height: 800,
         alt: "Together at Cape Cod"
       },
       {
         src: "/coverPhotos/tahoe-ski.jpg",
-        width: 900,
-        height: 600,
         alt: "Skiing together in Tahoe"
       },
       {
         src: "/coverPhotos/love-sf-moma.jpg",
-        width: 700,
-        height: 900,
         alt: "Valentine's Date in SF MoMa"
       },
       {
         src: "/coverPhotos/great-wall.jpg",
-        width: 1000,
-        height: 667,
         alt: "Climbing the Great Wall of China Together"
       },
       {
         src: "/coverPhotos/engagement-1.JPEG",
-        width: 800,
-        height: 1000,
         alt: "The moment we got engaged!"
       },
       {
         src: "/coverPhotos/toronto-keg.jpg",
-        width: 1100,
-        height: 733,
         alt: "Michael's birthday dinner at The Keg"
       },
       {
         src: "/coverPhotos/vball-yr2.JPG",
-        width: 900,
-        height: 1200,
         alt: "Viennese Ball Year 2"
       }
   ];
 
-  // Give it state for isMobile
+  // Give it state for isMobile and photos
   constructor(props) {
     super(props);
     this.state = {
-      isMobile: false
+      isMobile: false,
+      photos: [], // Will be populated with dimensions
+      photosLoaded: false
     }
   }
+
+  // Function to get image dimensions
+  getImageDimensions = (src: string): Promise<{width: number, height: number}> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve({
+          width: img.naturalWidth,
+          height: img.naturalHeight
+        });
+      };
+      img.onerror = () => {
+        // Fallback dimensions if image fails to load
+        resolve({
+          width: 800,
+          height: 600
+        });
+      };
+      img.src = src;
+    });
+  };
+
+  // Load all images and get their dimensions
+  loadPhotosWithDimensions = async () => {
+    const photosWithDimensions = await Promise.all(
+      this.photoSources.map(async (photo) => {
+        const dimensions = await this.getImageDimensions(photo.src);
+        return {
+          ...photo,
+          width: dimensions.width,
+          height: dimensions.height
+        };
+      })
+    );
+    
+    this.setState({ 
+      photos: photosWithDimensions,
+      photosLoaded: true 
+    });
+  };
 
   // Helper function to get frame colors based on theme
   getFrameColors = (isDark) => {
@@ -90,13 +116,16 @@ class HomeComponent extends React.Component<any, any> {
     }
   };
 
-  // Use useEffect to update isMobile on window resize
+  // Use useEffect to update isMobile on window resize and load photos
   componentDidMount() {
     this.setState({isMobile: window.innerWidth < 650});
     const handleResize = () => {
       this.setState({isMobile: window.innerWidth < 650});
     }
     window.addEventListener('resize', handleResize);
+    
+    // Load photos with their actual dimensions
+    this.loadPhotosWithDimensions();
   }
 
   // Render the page
@@ -120,10 +149,15 @@ class HomeComponent extends React.Component<any, any> {
             
             {/* React Photo Album Gallery */}
             <div style={{margin: "2rem 0"}}>
-              {this.state.isMobile ? (
+              {!this.state.photosLoaded ? (
+                // Loading state
+                <div style={{textAlign: "center", padding: "2rem"}}>
+                  <p>Loading photos...</p>
+                </div>
+              ) : this.state.isMobile ? (
                 // Mobile: Custom vertical stack - one photo above another
                 <div style={{display: "flex", flexDirection: "column", gap: "15px", width: "90%", margin: "0 auto"}}>
-                  {this.photos.map((photo, index) => (
+                  {this.state.photos.map((photo, index) => (
                     <div
                       key={index}
                       style={{
@@ -159,7 +193,7 @@ class HomeComponent extends React.Component<any, any> {
               ) : (
                 // Desktop: Rows layout with frames
                 <RowsPhotoAlbum 
-                  photos={this.photos}
+                  photos={this.state.photos}
                   targetRowHeight={300}
                   defaultContainerWidth={1200}
                   sizes={{
