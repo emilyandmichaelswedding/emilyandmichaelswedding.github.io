@@ -83,7 +83,7 @@ const saturdayEvents: EventItem[] = [
     title: 'Reception (Dinner & Dancing)',
     description: "A plated dinner will be served in the Union Club's Centennial Ballroom, followed by speeches and dancing. Josh, our DJ, will be playing a mix of romantic waltzes and fun party bops so you can give your new waltz skills a whirl or simply let loose and celebrate!",
     time: '5:00 PM—12:00 AM',
-    timeVague: 'Evening to Midnight',
+    timeVague: 'Evening until Midnight',
     location: 'The Union Club of British Columbia (805 Gordon St, Victoria, B.C.)',
     locationVague: 'The Union Club of British Columbia (805 Gordon St, Victoria, B.C.)',
     locationLink: 'https://maps.app.goo.gl/x6s9dZNxSGPRTw8w7',
