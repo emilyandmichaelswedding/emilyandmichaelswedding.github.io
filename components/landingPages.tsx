@@ -66,7 +66,7 @@ const saturdayEvents: EventItem[] = [
   {
     title: 'Wedding Ceremony',
     description: 'We get married! The ceremony will be a full Catholic mass lasting approximately one hour.',
-    time: '1:00 PM',
+    time: '1:00-2:00PM',
     timeVague: 'Early Afternoon',
     location: 'St. Andrew\'s Cathedral (740 View St, Victoria, B.C.)',
     locationVague: 'St. Andrew\'s Cathedral (740 View St, Victoria, B.C.)',
@@ -123,7 +123,7 @@ const ScheduleDay: React.FC<ScheduleDayProps> = ({ heading, events }) => (
             <div className="flex-1">
               <h3 className="text-xl font-medium">{event.title}</h3>
               
-              <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.timeVague || 'TBD'}</p>
+              {/* <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.timeVague || 'TBD'}</p>
           {event.locationVague && (
             <p className="text-sm text-gray-600 dark:text-gray-400">
                 <b>Location:</b> {
@@ -143,10 +143,10 @@ const ScheduleDay: React.FC<ScheduleDayProps> = ({ heading, events }) => (
             </p>
           )}
            <p className="text-sm text-gray-600 dark:text-gray-400"><b>Dress Code:</b> {event.dressCode || 'TBD'}</p>
-          <p className="text-sm text-gray-600 dark:text-gray-400"><b>Details to be Announced</b></p>
+          <p className="text-sm text-gray-600 dark:text-gray-400"><b>Details to be Announced</b></p> */}
           
           {/* COMMENTED OUT DETAILS */}
-          {/* <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.time || 'TBD'}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.time || 'TBD'}</p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
             <b>Location:</b> {
               event.locationLink ? (
@@ -172,7 +172,7 @@ const ScheduleDay: React.FC<ScheduleDayProps> = ({ heading, events }) => (
               className="mt-2 text-gray-700 dark:text-gray-200 [&_a]:text-blue-700 [&_a]:dark:text-blue-300 [&_a]:no-underline"
               dangerouslySetInnerHTML={{ __html: event.description }}
             />
-          )} */}
+          )}
 
             </div>
           </div>
