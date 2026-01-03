@@ -16,27 +16,27 @@ class HomeComponent extends React.Component<any, any> {
         alt: "Graduating from Stanford"
       },
       {
-        src: "/coverPhotos/cape-cod.jpg",
+        src: "/coverPhotos/cape-cod.jpeg",
         alt: "Together at Cape Cod"
       },
       {
-        src: "/coverPhotos/tahoe-ski.jpg",
+        src: "/coverPhotos/tahoe-ski.jpeg",
         alt: "Skiing together in Tahoe"
       },
       {
-        src: "/coverPhotos/love-sf-moma.jpg",
+        src: "/coverPhotos/love-sf-moma.jpeg",
         alt: "Valentine's Date in SF MoMa"
       },
       {
-        src: "/coverPhotos/engagement-1.JPEG",
+        src: "/coverPhotos/engagement-1.jpeg",
         alt: "The moment we got engaged!"
       },
       {
-        src: "/coverPhotos/great-wall.jpg",
+        src: "/coverPhotos/great-wall.jpeg",
         alt: "Climbing the Great Wall of China Together"
       },
       {
-        src: "/coverPhotos/toronto-keg.jpg",
+        src: "/coverPhotos/toronto-keg.jpeg",
         alt: "Michael's birthday dinner at The Keg"
       },
       {
