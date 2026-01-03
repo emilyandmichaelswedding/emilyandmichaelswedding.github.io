@@ -28,7 +28,7 @@ class HomeComponent extends React.Component<any, any> {
         alt: "Valentine's Date in SF MoMa"
       },
       {
-        src: "/coverPhotos/engagement-1.jpeg",
+        src: "/coverPhotos/engagement-1.JPEG",
         alt: "The moment we got engaged!"
       },
       {
