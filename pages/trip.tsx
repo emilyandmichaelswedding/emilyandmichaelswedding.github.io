@@ -5,8 +5,10 @@ import ButtonAppBar from '../components/navbar';
 import FooterBar from '../components/footer';
 import { title } from 'process';
 import { useTheme } from 'next-themes';
+import Cookies from 'js-cookie';
 
 type AccessLevel = 'family' | 'general' | null;
+const ACCESS_COOKIE_KEY = 'accessLevel';
 
 type TravelStep = {
 	title: string;
@@ -228,7 +230,9 @@ const TravelPage: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		const access = sessionStorage.getItem('accessLevel') as AccessLevel;
+		const cookieAccess = Cookies.get(ACCESS_COOKIE_KEY) as AccessLevel | undefined;
+		const sessionAccess = sessionStorage.getItem('accessLevel') as AccessLevel;
+		const access = cookieAccess ?? sessionAccess;
 		if (access === 'family' || access === 'general') {
 			setAuthorized(true);
 		} else {

@@ -1,10 +1,15 @@
 "use client"
 import FooterBar from '../components/footer';
 import ButtonAppBar from '../components/navbar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RowsPhotoAlbum, ColumnsPhotoAlbum } from "react-photo-album";
 import "react-photo-album/rows.css";
 import { useTheme } from "next-themes";
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+
+type AccessLevel = 'family' | 'general' | null;
+const ACCESS_COOKIE_KEY = 'accessLevel';
 
 // Make Home a class
 class HomeComponent extends React.Component<any, any> {
@@ -242,7 +247,28 @@ class HomeComponent extends React.Component<any, any> {
 // Wrapper component to handle theme
 export default function Home() {
   const { resolvedTheme } = useTheme();
+  const router = useRouter();
+  const [authorized, setAuthorized] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const cookieAccess = Cookies.get(ACCESS_COOKIE_KEY) as AccessLevel | undefined;
+    const sessionAccess = typeof window !== 'undefined'
+      ? (sessionStorage.getItem('accessLevel') as AccessLevel)
+      : null;
+    const access = cookieAccess ?? sessionAccess;
+
+    if (access === 'family' || access === 'general') {
+      setAuthorized(true);
+    } else {
+      setAuthorized(false);
+      router.replace('/');
+    }
+  }, [router]);
+
+  if (authorized !== true) {
+    return null; // Wait for auth check or redirect away
+  }
+
   const isDark = resolvedTheme === 'dark';
-  
   return <HomeComponent isDark={isDark} />;
 }

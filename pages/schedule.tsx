@@ -4,8 +4,10 @@ import { useRouter } from 'next/router';
 import ButtonAppBar from '../components/navbar';
 import FooterBar from '../components/footer';
 import { CloseFamilyLanding, GeneralLanding } from '../components/landingPages';
+import Cookies from 'js-cookie';
 
 type AccessLevel = 'family' | 'general' | null;
+const ACCESS_COOKIE_KEY = 'accessLevel';
 
 const SchedulePage: React.FC = () => {
   const router = useRouter();
@@ -20,7 +22,9 @@ const SchedulePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem('accessLevel') as AccessLevel;
+    const cookieAccess = Cookies.get(ACCESS_COOKIE_KEY) as AccessLevel | undefined;
+    const sessionAccess = sessionStorage.getItem('accessLevel') as AccessLevel;
+    const stored = cookieAccess ?? sessionAccess;
     if (stored === 'family' || stored === 'general') {
       setAccessLevel(stored);
     } else {

@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import FooterBar from '../components/footer';
 import ButtonAppBar from '../components/navbar';
+import Cookies from 'js-cookie';
 
 type AccessLevel = 'family' | 'general' | null;
 
 const FAMILY_HASH = 'a12f4725e1743fd2dfb30a3aeb28827dd685f7f854b674e3d2f363856555df7f';
 const GENERAL_HASH = '505999582e91c28fb13dd691861395f441296ec305535fb77e99dea7134ceccf';
+const ACCESS_COOKIE_KEY = 'accessLevel';
 
 async function hashPassword(raw: string): Promise<string> {
   const encoder = new TextEncoder();
@@ -43,9 +45,11 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const storedAccess = sessionStorage.getItem('accessLevel') as AccessLevel;
-    if (storedAccess === 'family' || storedAccess === 'general') {
-      setAccessLevel(storedAccess);
+    const storedAccess = Cookies.get(ACCESS_COOKIE_KEY) as AccessLevel | undefined;
+    const fallbackSession = sessionStorage.getItem('accessLevel') as AccessLevel;
+    const access = storedAccess ?? fallbackSession;
+    if (access === 'family' || access === 'general') {
+      setAccessLevel(access);
       router.replace('/home');
     }
   }, [router]);
@@ -59,14 +63,17 @@ const Home: React.FC = () => {
       if (hashed === FAMILY_HASH) {
         setAccessLevel('family');
         sessionStorage.setItem('accessLevel', 'family');
+        Cookies.set(ACCESS_COOKIE_KEY, 'family', { expires: 30, sameSite: 'Lax' });
         router.replace('/home');
       } else if (hashed === GENERAL_HASH) {
         setAccessLevel('general');
         sessionStorage.setItem('accessLevel', 'general');
+        Cookies.set(ACCESS_COOKIE_KEY, 'general', { expires: 30, sameSite: 'Lax' });
         router.replace('/home');
       } else {
         setAccessLevel(null);
         sessionStorage.removeItem('accessLevel');
+        Cookies.remove(ACCESS_COOKIE_KEY);
         setErrorMessage('Incorrect password. If you think there is an error, please reach out to Emily and Michael.');
       }
     } finally {

@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ButtonAppBar from '../components/navbar';
 import FooterBar from '../components/footer';
+import Cookies from 'js-cookie';
+
+const ACCESS_COOKIE_KEY = 'accessLevel';
 
 const RSVPPage: React.FC = () => {
   const router = useRouter();
@@ -17,7 +20,9 @@ const RSVPPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem('accessLevel');
+    const cookieAccess = Cookies.get(ACCESS_COOKIE_KEY);
+    const sessionAccess = sessionStorage.getItem('accessLevel');
+    const stored = cookieAccess ?? sessionAccess;
     if (stored === 'family' || stored === 'general') {
       setIsAuthorized(true);
     } else {
