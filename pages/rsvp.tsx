@@ -5,7 +5,15 @@ import ButtonAppBar from '../components/navbar';
 import FooterBar from '../components/footer';
 import Cookies from 'js-cookie';
 
-const ACCESS_COOKIE_KEY = 'accessLevel';
+const ACCESS_STORAGE_KEY = 'al_4f8e1bd0c3a34a51';
+const ACCESS_FAMILY_TOKEN = 'f_9c4c1f6e1a0c7d2b';
+const ACCESS_GENERAL_TOKEN = 'g_5b1a9d0c6e3f8a2d';
+
+const decodeAccessToken = (token: string | undefined | null) => {
+  if (token === ACCESS_FAMILY_TOKEN) return 'family';
+  if (token === ACCESS_GENERAL_TOKEN) return 'general';
+  return null;
+};
 
 const RSVPPage: React.FC = () => {
   const router = useRouter();
@@ -20,10 +28,10 @@ const RSVPPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const cookieAccess = Cookies.get(ACCESS_COOKIE_KEY);
-    const sessionAccess = sessionStorage.getItem('accessLevel');
-    const stored = cookieAccess ?? sessionAccess;
-    if (stored === 'family' || stored === 'general') {
+    const cookieAccess = Cookies.get(ACCESS_STORAGE_KEY);
+    const sessionAccess = sessionStorage.getItem(ACCESS_STORAGE_KEY);
+    const stored = decodeAccessToken(cookieAccess ?? sessionAccess);
+    if (stored) {
       setIsAuthorized(true);
     } else {
       router.replace('/');

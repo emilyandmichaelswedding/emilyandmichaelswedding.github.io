@@ -7,7 +7,15 @@ import { CloseFamilyLanding, GeneralLanding } from '../components/landingPages';
 import Cookies from 'js-cookie';
 
 type AccessLevel = 'family' | 'general' | null;
-const ACCESS_COOKIE_KEY = 'accessLevel';
+const ACCESS_STORAGE_KEY = 'al_4f8e1bd0c3a34a51';
+const ACCESS_FAMILY_TOKEN = 'f_9c4c1f6e1a0c7d2b';
+const ACCESS_GENERAL_TOKEN = 'g_5b1a9d0c6e3f8a2d';
+
+const decodeAccessToken = (token: string | undefined | null): AccessLevel => {
+  if (token === ACCESS_FAMILY_TOKEN) return 'family';
+  if (token === ACCESS_GENERAL_TOKEN) return 'general';
+  return null;
+};
 
 const SchedulePage: React.FC = () => {
   const router = useRouter();
@@ -22,10 +30,10 @@ const SchedulePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const cookieAccess = Cookies.get(ACCESS_COOKIE_KEY) as AccessLevel | undefined;
-    const sessionAccess = sessionStorage.getItem('accessLevel') as AccessLevel;
-    const stored = cookieAccess ?? sessionAccess;
-    if (stored === 'family' || stored === 'general') {
+    const cookieAccess = Cookies.get(ACCESS_STORAGE_KEY);
+    const sessionAccess = sessionStorage.getItem(ACCESS_STORAGE_KEY);
+    const stored = decodeAccessToken(cookieAccess ?? sessionAccess);
+    if (stored) {
       setAccessLevel(stored);
     } else {
       router.replace('/');
@@ -49,7 +57,7 @@ const SchedulePage: React.FC = () => {
             type="button"
             className="text-sm text-gray-600 dark:text-gray-300 underline"
             onClick={() => {
-              sessionStorage.removeItem('accessLevel');
+              sessionStorage.removeItem(ACCESS_STORAGE_KEY);
               router.replace('/');
             }}
           >

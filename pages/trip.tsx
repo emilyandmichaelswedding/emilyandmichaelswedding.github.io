@@ -8,7 +8,15 @@ import { useTheme } from 'next-themes';
 import Cookies from 'js-cookie';
 
 type AccessLevel = 'family' | 'general' | null;
-const ACCESS_COOKIE_KEY = 'accessLevel';
+const ACCESS_STORAGE_KEY = 'al_4f8e1bd0c3a34a51';
+const ACCESS_FAMILY_TOKEN = 'f_9c4c1f6e1a0c7d2b';
+const ACCESS_GENERAL_TOKEN = 'g_5b1a9d0c6e3f8a2d';
+
+const decodeAccessToken = (token: string | undefined | null): AccessLevel => {
+	if (token === ACCESS_FAMILY_TOKEN) return 'family';
+	if (token === ACCESS_GENERAL_TOKEN) return 'general';
+	return null;
+};
 
 type TravelStep = {
 	title: string;
@@ -230,10 +238,10 @@ const TravelPage: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		const cookieAccess = Cookies.get(ACCESS_COOKIE_KEY) as AccessLevel | undefined;
-		const sessionAccess = sessionStorage.getItem('accessLevel') as AccessLevel;
-		const access = cookieAccess ?? sessionAccess;
-		if (access === 'family' || access === 'general') {
+		const cookieAccess = Cookies.get(ACCESS_STORAGE_KEY);
+		const sessionAccess = sessionStorage.getItem(ACCESS_STORAGE_KEY);
+		const access = decodeAccessToken(cookieAccess ?? sessionAccess);
+		if (access) {
 			setAuthorized(true);
 		} else {
 			router.replace('/');

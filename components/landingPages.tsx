@@ -76,7 +76,7 @@ const saturdayEvents: EventItem[] = [
   },
   {
     title: 'Cocktail Reception',
-    description: "Drinks and canapes will be served in the Union Club's beautiful Reading Room, with Marlon, our pianist, playing live music.",
+    description: "Mingle in the Union Club's beautiful Reading Room, with Marlon, our pianist, playing live music. Doors and bar to open at 3:00 PM, with canapes to follow shortly after.",
     time: '3:00—5:00 PM',
     timeVague: 'Late Afternoon',
     location: 'The Union Club of British Columbia (805 Gordon St, Victoria, B.C.)',
@@ -88,7 +88,7 @@ const saturdayEvents: EventItem[] = [
   },
   {
     title: 'Reception (Dinner & Dancing)',
-    description: "A plated dinner will be served in the Union Club's Centennial Ballroom, followed by speeches and dancing. Josh, our DJ, will be playing a mix of romantic waltzes and fun party bops so you can give your new waltz skills a whirl or simply let loose and celebrate!",
+    description: "Enjoy a plated dinner in the Union Club's Centennial Ballroom, followed by speeches and dancing. Josh, our DJ, will be playing a mix of romantic waltzes and fun party bops so you can give your new waltz skills a whirl or simply let loose and celebrate!",
     time: '5:00 PM—12:00 AM',
     timeVague: 'Evening until Midnight',
     location: 'The Union Club of British Columbia (805 Gordon St, Victoria, B.C.)',
@@ -123,30 +123,30 @@ const ScheduleDay: React.FC<ScheduleDayProps> = ({ heading, events }) => (
             <div className="flex-1">
               <h3 className="text-xl font-medium">{event.title}</h3>
               
-              {/* <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.timeVague || 'TBD'}</p>
-          {event.locationVague && (
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-                <b>Location:</b> {
-                event.locationLink ? (
-                    <a
-                    href={event.locationLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-700 dark:text-blue-300 no-underline"
-                    >
-                    {event.location || 'View map'}
-                    </a>
-                ) : (
-                    event.location || 'TBD'
-                )
-                }
-            </p>
-          )}
-           <p className="text-sm text-gray-600 dark:text-gray-400"><b>Dress Code:</b> {event.dressCode || 'TBD'}</p>
-          <p className="text-sm text-gray-600 dark:text-gray-400"><b>Details to be Announced</b></p> */}
-          
+              <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.timeVague || 'TBD'}</p>
+            {event.locationVague && (
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <b>Location:</b> {
+                  event.locationLink ? (
+                      <a
+                      href={event.locationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-700 dark:text-blue-300 no-underline"
+                      >
+                      {event.location || 'View map'}
+                      </a>
+                  ) : (
+                      event.location || 'TBD'
+                  )
+                  }
+              </p>
+            )}
+            <p className="text-sm text-gray-600 dark:text-gray-400"><b>Dress Code:</b> {event.dressCode || 'TBD'}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400"><b>Details to be Announced</b></p>
+            
           {/* COMMENTED OUT DETAILS */}
-          <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.time || 'TBD'}</p>
+          {/* <p className="text-sm text-gray-600 dark:text-gray-400"><b>Time:</b> {event.time || 'TBD'}</p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
             <b>Location:</b> {
               event.locationLink ? (
@@ -172,7 +172,7 @@ const ScheduleDay: React.FC<ScheduleDayProps> = ({ heading, events }) => (
               className="mt-2 text-gray-700 dark:text-gray-200 [&_a]:text-blue-700 [&_a]:dark:text-blue-300 [&_a]:no-underline"
               dangerouslySetInnerHTML={{ __html: event.description }}
             />
-          )}
+          )} */}
 
             </div>
           </div>
