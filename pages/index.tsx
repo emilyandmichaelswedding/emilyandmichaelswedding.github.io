@@ -9,7 +9,17 @@ type AccessLevel = 'family' | 'general' | null;
 
 const FAMILY_HASH = 'a12f4725e1743fd2dfb30a3aeb28827dd685f7f854b674e3d2f363856555df7f';
 const GENERAL_HASH = '505999582e91c28fb13dd691861395f441296ec305535fb77e99dea7134ceccf';
-const ACCESS_COOKIE_KEY = 'accessLevel';
+
+// Obfuscated storage keys/values to avoid obvious names in devtools
+const ACCESS_STORAGE_KEY = 'al_4f8e1bd0c3a34a51';
+const ACCESS_FAMILY_TOKEN = 'f_9c4c1f6e1a0c7d2b';
+const ACCESS_GENERAL_TOKEN = 'g_5b1a9d0c6e3f8a2d';
+
+const decodeAccessToken = (token: string | undefined | null): AccessLevel => {
+  if (token === ACCESS_FAMILY_TOKEN) return 'family';
+  if (token === ACCESS_GENERAL_TOKEN) return 'general';
+  return null;
+};
 
 async function hashPassword(raw: string): Promise<string> {
   const encoder = new TextEncoder();
@@ -45,10 +55,10 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const storedAccess = Cookies.get(ACCESS_COOKIE_KEY) as AccessLevel | undefined;
-    const fallbackSession = sessionStorage.getItem('accessLevel') as AccessLevel;
-    const access = storedAccess ?? fallbackSession;
-    if (access === 'family' || access === 'general') {
+    const storedAccess = Cookies.get(ACCESS_STORAGE_KEY);
+    const fallbackSession = sessionStorage.getItem(ACCESS_STORAGE_KEY);
+    const access = decodeAccessToken(storedAccess ?? fallbackSession);
+    if (access) {
       setAccessLevel(access);
       router.replace('/home');
     }
@@ -62,18 +72,18 @@ const Home: React.FC = () => {
       const hashed = await hashPassword(passwordInput.trim());
       if (hashed === FAMILY_HASH) {
         setAccessLevel('family');
-        sessionStorage.setItem('accessLevel', 'family');
-        Cookies.set(ACCESS_COOKIE_KEY, 'family', { expires: 30, sameSite: 'Lax' });
+        sessionStorage.setItem(ACCESS_STORAGE_KEY, ACCESS_FAMILY_TOKEN);
+        Cookies.set(ACCESS_STORAGE_KEY, ACCESS_FAMILY_TOKEN, { expires: 30, sameSite: 'Lax' });
         router.replace('/home');
       } else if (hashed === GENERAL_HASH) {
         setAccessLevel('general');
-        sessionStorage.setItem('accessLevel', 'general');
-        Cookies.set(ACCESS_COOKIE_KEY, 'general', { expires: 30, sameSite: 'Lax' });
+        sessionStorage.setItem(ACCESS_STORAGE_KEY, ACCESS_GENERAL_TOKEN);
+        Cookies.set(ACCESS_STORAGE_KEY, ACCESS_GENERAL_TOKEN, { expires: 30, sameSite: 'Lax' });
         router.replace('/home');
       } else {
         setAccessLevel(null);
-        sessionStorage.removeItem('accessLevel');
-        Cookies.remove(ACCESS_COOKIE_KEY);
+        sessionStorage.removeItem(ACCESS_STORAGE_KEY);
+        Cookies.remove(ACCESS_STORAGE_KEY);
         setErrorMessage('Incorrect password. If you think there is an error, please reach out to Emily and Michael.');
       }
     } finally {
